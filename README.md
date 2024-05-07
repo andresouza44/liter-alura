@@ -1,5 +1,5 @@
 # ONE - Oracle Next Education Challenges.
-Challenge 2 desenvolvido para Formação de Java do Programa ONE.
+Challenge 2 desenvolvido para Formação Java do Programa ONE.
 
 <img src="Screenshot_9.png" alt="under" width="25%" height="25%">
 
@@ -11,10 +11,16 @@ Challenge 2 desenvolvido para Formação de Java do Programa ONE.
 
 - Desenvolver um Catálogo de Livros que ofereça interação textual (via console) com os usuários, proporcionando no mínimo 5 opções de interação. 
 - Os livros serão buscados através da API Gutendex.
+- Persistência dos dados no BD PostgreSQL.
+- Tratamento das entradas inválidas.
 
 
- 
 
-### Tela e Funcionalidades do Aplicativo
+### Funcionalidades do Aplicativo
+- Busca de livros por título (API Gutendex)
+- Listar livros cadastrados
+- Listar autores cadastrados
+- Listar autores vivos em determinado ano
+- Listar livros em determinado idioma
 
 

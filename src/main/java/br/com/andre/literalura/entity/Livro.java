@@ -74,10 +74,11 @@ public class Livro {
 
     @Override
     public String toString() {
-        return "\n----- Livro -----" +
-                "\nTítulo: " + titulo +
-                "\nAutor: " + autor.getAutor() +
-                "\nIdioma: " + idioma +
-                "\nNúmero de downloads: " + numeroDownloads;
+        return  titulo;
+//        return "\n----- Livro -----" +
+//                "\nTítulo: " + titulo +
+//                "\nAutor: " + autor.getAutor() +
+//                "\nIdioma: " + idioma +
+//                "\nNúmero de downloads: " + numeroDownloads;
     }
 }
