@@ -13,12 +13,13 @@ public class Autor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String autor;
     private Integer anoNascimento;
     private Integer anoFalecimento;
 
-    @OneToMany(mappedBy = "autor")
-    private List<Livro> livro = new ArrayList<>();
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Livro> livros = new ArrayList<>();
 
     public Autor(){}
 
@@ -61,15 +62,15 @@ public class Autor {
         this.anoFalecimento = anoFalecimento;
     }
 
-    public List<Livro> getLivro() {
-        return livro;
+    public List<Livro> getLivros() {
+        return livros;
     }
 
     @Override
     public String toString() {
-        return "Autor: " + autor +
-                "Ano de Nascimento: " + anoNascimento +
-                "Ano de Falecimento: " + anoFalecimento;
+        return "\nAutor: " + autor +
+                "\nAno de Nascimento: " + anoNascimento +
+                "\nAno de Falecimento: " + anoFalecimento;
 
 
     }

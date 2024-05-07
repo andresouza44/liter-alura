@@ -2,6 +2,9 @@ package br.com.andre.literalura;
 
 
 import br.com.andre.literalura.main.Menu;
+import br.com.andre.literalura.repository.AutorRepository;
+import br.com.andre.literalura.repository.LivroRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,6 +12,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class LiterAluraApplication implements CommandLineRunner {
 
+    @Autowired
+    LivroRepository livroRepository;
+
+    @Autowired
+    AutorRepository autorRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(LiterAluraApplication.class, args);
@@ -16,8 +24,8 @@ public class LiterAluraApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-//       Menu.menuPrincipal();
+        Menu menu = new Menu(livroRepository, autorRepository);
+        menu.menu();
 
 
     }

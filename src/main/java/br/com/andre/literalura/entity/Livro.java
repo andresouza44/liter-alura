@@ -10,6 +10,7 @@ public class Livro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String titulo;
 
     @ManyToOne
@@ -73,10 +74,10 @@ public class Livro {
 
     @Override
     public String toString() {
-        return "----- Livro -----" +
-                "Título: " + titulo +
-                "Autor: " + autor +
-                "Idioma: " + idioma +
-                "Número de downloads: " + numeroDownloads;
+        return "\n----- Livro -----" +
+                "\nTítulo: " + titulo +
+                "\nAutor: " + autor.getAutor() +
+                "\nIdioma: " + idioma +
+                "\nNúmero de downloads: " + numeroDownloads;
     }
 }
