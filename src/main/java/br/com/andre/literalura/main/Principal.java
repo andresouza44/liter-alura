@@ -145,6 +145,7 @@ public class Principal {
             System.out.println("Não foi encontrado nenhum escritor vivo no ano de " + data);
         } else {
             imprimeAutores(autores);
+
         }
     }
 
@@ -159,11 +160,13 @@ public class Principal {
                 """);
         var idioma = scan.nextLine().toUpperCase();
         try {
-            List<Livro> livros = livroRepository.findByIdioma(Idioma.valueOf(idioma));
+            Idioma idiomaEscolhido = Idioma.valueOf(idioma);
+            List<Livro> livros = livroRepository.findByIdioma(idiomaEscolhido);
             if (livros.isEmpty()){
-                System.out.println("\nNão foi encontrado nenhum livro nesse idioma.");
+                System.out.println("\nNão foi encontrado nenhum livro em " + idiomaEscolhido.getNome());
             }else {
                 imprimeLivros(livros);
+                System.out.println("Foram encontrados " + livros.size() + " livros no idioma " +  idiomaEscolhido.getNome());
             }
         }
         catch (IllegalArgumentException e ){
