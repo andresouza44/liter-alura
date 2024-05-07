@@ -11,10 +11,7 @@ import br.com.andre.literalura.util.SalvarDados;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class Principal {
@@ -26,6 +23,7 @@ public class Principal {
     AutorRepository autorRepository;
 
     Scanner scan = new Scanner(System.in);
+    DoubleSummaryStatistics ds = new DoubleSummaryStatistics();
 
     public Principal() {
 
@@ -62,6 +60,9 @@ public class Principal {
                     case 5:
                         listarLivrosPorIdioma();
                         break;
+                    case 6:
+                        top10LivrosBaixados();
+                        break;
                     case 0:
                         sair = true;
                         System.out.println("Saindo...");
@@ -93,7 +94,7 @@ public class Principal {
 
         Optional<Livro> livro = livroRepository.findByTituloContainingIgnoreCase(nomeLivro);
         if (!livro.isPresent()) {
-            System.out.println("Buscando .....");
+            System.out.println("\u001b[31m \u001b[3mBuscando .....\u001b[0m");
             var url = "https://gutendex.com/books/?search=" + nomeLivro.replace(" ", "+");
             String json = consumoApi.obterDados(url);
 
@@ -117,6 +118,7 @@ public class Principal {
                 3 - Listar autores registrados
                 4 - Listar autores vivos em um determinado ano
                 5 - Listar livros em um determinado idioma
+                6 - Top 10 livros mais baixados
                                 
                 0 - Sair
                                 
@@ -174,6 +176,12 @@ public class Principal {
             listarLivrosPorIdioma();
         }
 
+
+    }
+    private void top10LivrosBaixados(){
+        System.out.println("Lista dos 10 Livros mais baixados");
+        List<Livro> livros = livroRepository.top10LivrosBaixados();
+        imprimeLivros(livros);
 
     }
 
