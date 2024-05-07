@@ -12,6 +12,8 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class SalvarDados {
 
@@ -35,33 +37,41 @@ public class SalvarDados {
 
         ResultDto results = gson.fromJson(json, ResultDto.class);
 
-        LivroDto livroDto = results.results().get(0);
-        AutorDto autorDto = livroDto.getAuthors().get(0);
+        if (!results.results().isEmpty()) {
 
-        gravaDados(autorDto, livroDto);
+            LivroDto livroDto = results.results().get(0);
+            AutorDto autorDto = livroDto.getAuthors().get(0);
 
+            gravaDados(autorDto, livroDto);
+
+        } else {
+            System.out.println("Livro não encontrado! ");
+        }
     }
 
     private void gravaDados(AutorDto autorDto, LivroDto livroDto) {
-
-        Autor autor = new Autor();
-        autor.setAutor(autorDto.getName());
-        autor.setAnoFalecimento(autorDto.getDeath_year());
-        autor.setAnoNascimento(autorDto.getBirth_year());
-
         Livro livro = new Livro();
+        Optional<Autor> autorOptional = autorRepository.findByAutor(livroDto.getAuthors().get(0).getName());
+        Autor autor = new Autor();
+        if (autorOptional.isPresent()){
+            autor = autorOptional.get();
+        }else {
+            autor.setAutor(autorDto.getName());
+            autor.setAnoFalecimento(autorDto.getDeath_year());
+            autor.setAnoNascimento(autorDto.getBirth_year());
+            autorRepository.save(autor);
+        }
+
         livro.setAutor(autor);
         livro.setTitulo(livroDto.getTitle());
         livro.setIdioma(Idioma.valueOf(livroDto.getLanguages().get(0).toUpperCase()));
         livro.setNumeroDownloads(livroDto.getDownload_count());
 
-        autor.getLivros().add(livro);
-
-        autorRepository.save(autor);
         livroRepository.save(livro);
 
         System.out.println(autor);
         System.out.println(livro);
+
 
     }
 
