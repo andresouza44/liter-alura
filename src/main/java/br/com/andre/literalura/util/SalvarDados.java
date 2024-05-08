@@ -10,6 +10,7 @@ import br.com.andre.literalura.repository.AutorRepository;
 import br.com.andre.literalura.repository.LivroRepository;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -67,7 +68,12 @@ public class SalvarDados {
         livro.setIdioma(Idioma.valueOf(livroDto.getLanguages().get(0).toUpperCase()));
         livro.setNumeroDownloads(livroDto.getDownload_count());
 
-        livroRepository.save(livro);
+        try {
+            livroRepository.save(livro);
+        }catch (DataIntegrityViolationException e){
+            System.out.println("Não foi possível salvar o item no banco de dados");
+        }
+
 
         System.out.println(autor);
         System.out.println(livro);

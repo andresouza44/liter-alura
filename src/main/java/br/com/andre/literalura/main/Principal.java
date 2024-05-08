@@ -158,6 +158,7 @@ public class Principal {
                 es - espanhol
                 en - inglês
                 fr - francês
+                it - italiano
                 pt = português
                 """);
         var idioma = scan.nextLine().toUpperCase();
@@ -175,9 +176,8 @@ public class Principal {
             System.out.println("\nEntre com um idioma válido!");
             listarLivrosPorIdioma();
         }
-
-
     }
+
     private void top10LivrosBaixados(){
         System.out.println("Lista dos 10 Livros mais baixados");
         List<Livro> livros = livroRepository.top10LivrosBaixados();
