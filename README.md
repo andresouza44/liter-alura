@@ -1,7 +1,6 @@
 # ONE - Oracle Next Education Challenges.
-Challenge 2 desenvolvido para Formação Java do Programa ONE.
+Challenge 2 - Desenvolvido para Formação Java do Programa ONE.
 
-<img src="Screenshot_9.png" alt="under" width="25%" height="25%">
 
 ## Catálogo de Livros       
 
